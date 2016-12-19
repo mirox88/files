@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>title</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- script src="script.js"></script -->
+  </head>
+  <body>
+      
+      
+      <style>
+    
+          
+      </style>
+      
+
+      
+      
+      
+      <div class="solv-main"><div class="solv" data-sum="0"></div><div class="inp">000</div></div>
+      
+      <div class="score" data-count="0"><div class="good" data-count="0">0</div><div class="wrong" data-count="0">0</div></div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <script>
+      
+      
+      document.querySelector('.inp').addEventListener('mouseover',function(){ this.classList.add('solv-main-input-mover'); });  //kolor tła dla pola wprowadzania
+      document.querySelector('.inp').addEventListener('mouseout',function(){ this.classList.remove('solv-main-input-mover'); }); //usunięcie koloru tła dla pola wprowadzania
+      //document.querySelector('.solv-main-input').focus(); //focus na elemencie wprowadzania - wyłączone bo nie jest inputem
+      los();
+          
+      //obsługa wciskanych key dla liczb i enter
+          
+      window.addEventListener('keydown', keyd); 
+          
+      function keyd(e){
+          //console.log(e);
+          
+          const k=e.keyCode;
+          const inp=document.querySelector('.inp');
+          if( ((k>47 && k<58) || (k>95 && k<106)) && inp.innerHTML.length<3 ) {     //z klawiatury wprowadza się liczbę oraz nie ma wiecej niz 3 cyfry
+              inp.innerHTML+=e.key;
+          }
+          if(k==8 || k==46){                                     //BSpace i DEL
+              inp.innerHTML = inp.innerHTML.slice(0,-1);
+          }
+          if(k==13) {
+              //console.dir( parseInt(document.querySelector('.n1').innerHTML)  + parseInt(document.querySelector('.n2').innerHTML) );
+              if(parseInt(document.querySelector('.solv').dataset.sum) == parseInt(document.querySelector('.inp').innerHTML ) ) {
+                  rebuildBar(1);
+              }
+              else{
+                  rebuildBar(0);
+              }
+                  
+                  
+                  
+              los();
+          } // zatwierdzono
+      }
+          
+      
+          
+        function los(){
+          const maxnum =    3;    //maksymalna liczba która jest symowana
+          const maxsum =   100;    //maksymalna suma z liczb
+          const maxparts =  20;    //maksymalna ilość liczb która jest sumowana
+
+            //losujemy ilość liczb
+            const n = Math.round(Math.random()*(maxparts-2))+2;
+            
+            
+            do{
+                g = new Array();                                                                    //czysta tablica
+                for(i=0;i<n;i++) { 
+                    g.push( Math.round(Math.random()*maxnum ));                                     //losujemy wartości
+                }
+                sum = g.reduce(function(total,a){ return total+a; },0);                             //sumujemy tablice
+                //console.log(sum);
+            }while(sum>maxsum);                                            //to wszystko aż do momentu kiedy nie przekroczymy maxsum
+            
+            //document.querySelector('.inp').innerHTML='';
+            document.querySelector('.solv').innerHTML=g.join('+') + '=';   //wyświetlamy równanie
+            
+            document.querySelector('.solv').dataset.sum=sum;
+            
+            
+            
+            //dostosowanie wielkości czcionki do szerokości ekranu
+            
+          
+          const ms = document.querySelector('.solv-main');
+          const s  = ms.querySelector('.solv');
+          var fontSize=13;
+            
+          
+          while(ms.offsetWidth < ms.scrollWidth){
+                fontSize--;
+                document.documentElement.style.setProperty('--fsize',`${fontSize}rem`);
+          }
+          document.querySelector('.inp').innerHTML=''; //kasujemy .inp początkowo było tam 000 aby zmieścić wszystko na ekranie
+            
+          
+        }
+          
+         
+          
+          function rebuildBar(answer){
+              
+              const good=document.querySelector('.good');
+              const wrong=document.querySelector('.wrong');
+              if(answer==1) good.dataset.count++;
+              else wrong.dataset.count++;
+              sum = (parseInt(good.dataset.count) + parseInt(wrong.dataset.count));
+              //przemieszczamy paski procentowo
+              good.style.width=(good.dataset.count * 80 / sum)+'vw';
+              wrong.style.width=(wrong.dataset.count * 80 / sum)+'vw';
+              //aktualizujemy wartość na pasku
+              wrong.innerHTML=wrong.dataset.count;
+              good.innerHTML=good.dataset.count;
+              
+          }
+          
+          
+          
+          
+          
+          
+      </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

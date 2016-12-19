@@ -1,0 +1,59 @@
+:root{--fsize: 13rem;}     
+
+html{}
+          body{font-size: 10px; margin: 0; border: 0; padding: 0; font-family: sans-serif;}
+
+
+
+
+
+.solv-main{
+              color: #333; 
+              display: block; 
+              margin-top: 20vh; 
+              font-size: var(--fsize);        
+              text-align: center; 
+              font-weight: bold;
+              border: 1px solid lime;
+            }
+       
+
+
+
+
+
+
+          .inp, .solv{ 
+              display: inline; 
+               
+              width: 22%; 
+              font-weight: bold; 
+              border: 0; 
+              margin-left: 10px; 
+              
+              outline: none;
+            }
+          
+
+
+
+
+
+
+
+
+        .score{       margin: 6vh auto 0 auto;
+                        border: 0; 
+                        padding: 0;
+                        display: block;
+                        width: 80vw;
+                         
+              
+              
+
+          }
+          
+          .score .wrong {background: red; width: 0vw;  display: inline-block; border-radius: 0px 4px 4px 0px; box-shadow:inset -10px 0 40px 1px #a70000; }
+          .score .good  {background: green; width: 80vw; ; display: inline-block; border-radius: 4px 0px 0px 4px;  box-shadow:inset -10px 0 40px 1px #004a00;}
+          .score .good, .score .wrong { margin: 0; border: 0; padding: 0; transition: all 1.4s; line-height: 2vh; 
+          text-align: center; color: #dfdfdf; font-size: 1vh; overflow: hidden; }
